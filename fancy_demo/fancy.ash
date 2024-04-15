@@ -44,3 +44,20 @@ struct FancyTextBase {
   protected int _width;
 };
 
+struct FancyTypedText extends FancyTextBase {
+  /// Clears all text and resets all timers
+  import void Clear();
+  /// Sets new string, resets all timers and commences typing
+  import void Start(String text);
+  /// Skips all the remaining typing
+  import void Skip();
+  /// Update typed text state, advancing it by single tick
+  import void Tick();
+  /// Draw typed text state, advancing it by single tick
+  import void DrawTyped(DrawingSurface* surf);
+  
+  // internal
+  protected int _typed_token_count;
+  protected int _typed_token_len;  
+};
+
