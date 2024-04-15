@@ -26,18 +26,18 @@ jobs:
         run: |
           atbx export script fancy_demo/ fancy .
 
-      - name: Upload Game Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: fancy_demo
-          path: |
-            fancy_demo/Compiled/*/*
-
       - name: Zip Game Project
         run: |
           Remove-Item -Recurse -Force fancy_demo/Compiled/Data
           Remove-Item -Force fancy_demo/Game.agf.user
           Compress-Archive -Path fancy_demo/* -Destination fancy_demo_windows.zip
+
+      - name: Upload Game and Project Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fancy_demo
+          path: |
+            fancy_demo_windows.zip
 
       - name: Upload Module Artifact
         uses: actions/upload-artifact@v4
