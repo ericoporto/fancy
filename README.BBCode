@@ -22,7 +22,40 @@ The cheatsheet of tags are below. Some tags are "solo", they don't require a clo
 
 [size=14pt][b]Usage[/b][/size]
 
-To be written...
+I will improve this soon, for now some small examples
+
+[i]Using a regular drawing surface:[/i]
+
+[code]function room_AfterFadeIn()
+{
+  DrawingSurface* surf = Room.GetDrawingSurfaceForBackground();
+  
+  surf.DrawingColor = 10565;
+  surf.DrawRectangle(48, 48, 248, 108);
+  surf.DrawFancyTextWrapped(48, 48, 200, 22422, eFontSpeech, "Hello!\nCan you find me the [c:27647]blue cup [s:2041][/c]?\nI lost it in the [c:64493]dangerous [f:0]planet[/f][/c], somewhere.");
+}[/code]
+
+[i]Simple not-useful typed text example:[/i]
+
+[code]FancyTypedText fttb; // has to be global
+
+function room_AfterFadeIn()
+{
+  fttb.SetDrawingConfig(FancyDrawingConfig.Create(eFontSpeech, 22422));
+  fttb.SetDrawingArea(48, 48, 200);
+  fttb.Start("Hello!\nCan you find me the [c:27647]blue cup [s:2041][/c]?\nI lost it in the [c:64493]dangerous [f:0]planet[/f][/c], somewhere.");
+}
+
+void repeatedly_execute_always()
+{
+  DrawingSurface* surf = Room.GetDrawingSurfaceForBackground();
+  
+  surf.DrawingColor = 10565;
+  surf.DrawRectangle(48, 48, 248, 108);
+  
+  fttb.Tick();
+  fttb.DrawTyped(surf);  
+}[/code]
 
 
 [hr]
