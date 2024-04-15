@@ -1,0 +1,41 @@
+name: CI
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build-and-test-windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: gets ags-toolbox
+        run: |
+          curl -Lo atbx.exe https://github.com/ericoporto/agstoolbox/releases/download/0.4.9/atbx.exe
+          echo "${{github.workspace}}" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Install AGS
+        run: |
+          atbx install editor -q fancy_demo/
+          
+      - name: Build game
+        run: |
+          atbx build fancy_demo/
+          
+      - name: Export module
+        run: |
+          atbx export script fancy_demo/ fancy .
+
+      - name: Upload Game Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fancy_demo
+          path: |
+            fancy_demo/Compiled/*/*
+      
+      - name: Upload Module Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fancy_module
+          path: |
+            fancy.scm
