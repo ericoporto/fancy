@@ -36,9 +36,7 @@ jobs:
       - name: Zip Game Project
         run: |
           Remove-Item -Recurse -Force fancy_demo/Compiled/Data
-          Remove-Item -Force fancy_demo/Game.agf.bak
           Remove-Item -Force fancy_demo/Game.agf.user
-          Remove-Item -Force fancy_demo/backup_acsprset.spr
           Compress-Archive -Path fancy_demo/* -Destination fancy_demo_windows.zip
 
       - name: Upload Module Artifact
