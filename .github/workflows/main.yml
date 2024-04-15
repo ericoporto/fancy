@@ -36,7 +36,6 @@ jobs:
       - name: Zip Game Project
         run: |
           Remove-Item -Recurse -Force fancy_demo/Compiled/Data
-          Remove-Item -Recurse -Force fancy_demo/_Debug
           Remove-Item -Force fancy_demo/Game.agf.bak
           Remove-Item -Force fancy_demo/Game.agf.user
           Remove-Item -Force fancy_demo/backup_acsprset.spr
