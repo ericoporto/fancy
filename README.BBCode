@@ -12,4 +12,67 @@ The cheatsheet of tags are below. Some tags are "solo", they don't require a clo
 [li]Sprite tag is solo  [font=Courier New]"[s:123]"[/font], where [font=Courier New]"123"[/font] is an ags sprite.[/li]
 [/list]
 
-Note: use [font=Courier New]"\n"[/font] for linefeed, old lone [font=Courier New]"["[/font] ags linefeed is not supported.
+[i]Note:[/i] use [font=Courier New]"\n"[/font] for linefeed, old lone [font=Courier New]"["[/font] ags linefeed is not supported.
+
+
+[size=14pt][b]Usage[/b][/size]
+
+To be written...
+
+
+[size=14pt][b]Script API[/b][/size]
+
+[size=12pt][b]Script Extensions[/b][/size]
+
+[font=Courier New][b]DrawingSurface.DrawFancyTextWrapped[/b][/font]
+[code]void DrawingSurface.DrawFancyTextWrapped(int x, int y, int width, int color, FontType font, const string text);[/code]
+Draws text with fancy parsing wrapped within specified boundaries on the drawing surface.
+
+
+[size=12pt][b]FancyDrawingConfig[/b][/size]
+
+[font=Courier New][b]FancyDrawingConfig.Create[/b][/font]
+[code]static FancyDrawingConfig* FancyDrawingConfig.Create(FontType font, int color, Alignment align, int line_spacing);[/code]
+Configuration structure for fancy text drawing, allowing customization of font, text color, line spacing, and alignment.
+
+
+[size=12pt][b]FancyTextBase[/b][/size]
+
+[font=Courier New][b]FancyTextBase.SetDrawingConfig[/b][/font]
+[code]void FancyTextBase.SetDrawingConfig(FancyDrawingConfig* config);[/code]
+Sets the drawing configuration for fancy text rendering.
+
+[font=Courier New][b]FancyTextBase.SetDrawingArea[/b][/font]
+[code]void FancyTextBase.SetDrawingArea(int x, int y, int width = FANCY_INFINITE_WIDTH);[/code]
+Sets the area for drawing fancy text, specifying the position and width.
+
+[font=Courier New][b]FancyTextBase.SetFancyText[/b][/font]
+[code]void FancyTextBase.SetFancyText(String text);[/code]
+Sets the text content for the fancy text box.
+
+[font=Courier New][b]FancyTextBase.Draw[/b][/font]
+[code]void FancyTextBase.Draw(DrawingSurface* surf);[/code]
+Draws the fancy text on the specified drawing surface.
+
+
+[size=12pt][b]FancyTypedText[/b][/size]
+
+[font=Courier New][b]FancyTypedText.Clear[/b][/font]
+[code]void FancyTypedText.Clear();[/code]
+Clears all text and resets everything for typed text.
+
+[font=Courier New][b]FancyTypedText.Start[/b][/font]
+[code]void FancyTypedText.Start(String text);[/code]
+Sets a new string and resets everything to start typing. You can then use Tick repeatedly to advance the text.
+
+[font=Courier New][b]FancyTypedText.Skip[/b][/font]
+[code]void FancyTypedText.Skip();[/code]
+Skips all remaining typing of the text.
+
+[font=Courier New][b]FancyTypedText.Tick[/b][/font]
+[code]void FancyTypedText.Tick();[/code]
+Updates the typed text state, advancing it by a single tick.
+
+[font=Courier New][b]FancyTypedText.DrawTyped[/b][/font]
+[code]void FancyTypedText.DrawTyped(DrawingSurface* surf);[/code]
+Draws the typed text in it's current state.
