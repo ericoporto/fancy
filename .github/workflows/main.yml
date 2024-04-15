@@ -17,11 +17,11 @@ jobs:
       - name: Install AGS
         run: |
           atbx install editor -q fancy_demo/
-          
+
       - name: Build game
         run: |
           atbx build fancy_demo/
-          
+
       - name: Export module
         run: |
           atbx export script fancy_demo/ fancy .
@@ -32,10 +32,28 @@ jobs:
           name: fancy_demo
           path: |
             fancy_demo/Compiled/*/*
-      
+
+      - name: Zip Game Project
+        run: |
+          Remove-Item -Recurse -Force fancy_demo/Compiled/Data
+          Remove-Item -Recurse -Force fancy_demo/_Debug
+          Remove-Item -Force fancy_demo/Game.agf.bak
+          Remove-Item -Force fancy_demo/Game.agf.user
+          Remove-Item -Force fancy_demo/backup_acsprset.spr
+          Compress-Archive -Path fancy_demo/* -Destination fancy_demo_windows.zip
+
       - name: Upload Module Artifact
         uses: actions/upload-artifact@v4
         with:
           name: fancy_module
           path: |
             fancy.scm
+
+      - name: Create release and upload assets
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: fancy.scm,fancy_demo_windows.zip
+          allowUpdates: true
+          omitBodyDuringUpdate: true
+          token: ${{ secrets.GITHUB_TOKEN }}
