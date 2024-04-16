@@ -2574,6 +2574,20 @@
         <TTFMetricsFixup>None</TTFMetricsFixup>
         <VerticalOffset>0</VerticalOffset>
       </Font>
+      <Font>
+        <AutoOutlineStyle>Squared</AutoOutlineStyle>
+        <AutoOutlineThickness>1</AutoOutlineThickness>
+        <ID>3</ID>
+        <LineSpacing>0</LineSpacing>
+        <Name>SpeechWithoutOutline</Name>
+        <OutlineFont>0</OutlineFont>
+        <OutlineStyle>None</OutlineStyle>
+        <PointSize>0</PointSize>
+        <SizeMultiplier>1</SizeMultiplier>
+        <SourceFilename>AGSFNT1.WFN</SourceFilename>
+        <TTFMetricsFixup>None</TTFMetricsFixup>
+        <VerticalOffset>0</VerticalOffset>
+      </Font>
     </Fonts>
     <Palette>
       <PaletteEntry Index="0" Type="Gamewide" Red="0" Green="0" Blue="0" />
