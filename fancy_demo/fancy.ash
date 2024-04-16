@@ -3,7 +3,7 @@
 
 // internal abstraction
 managed struct TextToken {
-  int text_begin, text_length, color, font, type, width, height, line_height, line_width, box_width;
+  int text_begin, text_length, color, outline_color, font, type, width, height, line_height, line_width, box_width, box_height;
 };
 
 #define FANCY_INFINITE_WIDTH 65536
@@ -16,9 +16,9 @@ managed struct TextToken {
 import void DrawFancyTextWrapped(this DrawingSurface*, int x, int y, int width, int color, FontType font, const string text);
 
 managed struct FancyDrawingConfig {
-  int Font, TextColor, LineSpacing, TextAlign;
+  int Font, TextColor, OutlineColor, OutlineWidth, LineSpacing, TextAlign;
   /// Create minimal fancy drawing configuration
-  static import FancyDrawingConfig* Create(FontType font, int color, Alignment align = eAlignBottomLeft, int line_spacing = 0); 
+  static import FancyDrawingConfig* Create(FontType font, int color, int outline_color = COLOR_TRANSPARENT, int outline_width = 1, Alignment align = eAlignBottomLeft, int line_spacing = 0); 
 };
 
 struct FancyTextBase {  
