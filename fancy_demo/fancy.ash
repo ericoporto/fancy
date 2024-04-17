@@ -16,8 +16,20 @@ managed struct FancyState {
 // ---------------- fancy module public interface -----------------------
 // ----------------------------------------------------------------------
 
-/// Draw the text parsing fancyness
+/// Draw the text from a fancy string with word-wrap at set width 
 import void DrawFancyTextWrapped(this DrawingSurface*, int x, int y, int width, int color, FontType font, const string text);
+
+/// Draw the text from a fancy string
+import void DrawFancyText(this DrawingSurface*, int x, int y, int color, FontType font, const string text);
+
+/// Create a sprite with the text of a fancy string wwith word-wrap at set width 
+import DynamicSprite* CreateFromFancyTextWrapped(static DynamicSprite, int width, int color, FontType font, const string text);
+
+/// Create a sprite with the text of a fancy string
+import DynamicSprite* CreateFromFancyText(static DynamicSprite, int color, FontType font, const string text);
+
+/// Creates a screen overlay from fancy text
+import Overlay* CreateFancyTextual(static Overlay, int x, int y, int width, FontType font, int color, const string text);
 
 managed struct FancyDrawingConfig {
   int Font, TextColor, OutlineColor, OutlineWidth, LineSpacing, TextAlign;
