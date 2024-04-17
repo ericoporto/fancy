@@ -8,7 +8,8 @@ With Fancy you can have text with multiple colors, fonts, with sprites and other
 
 The cheatsheet of tags are below. Some tags are "solo", they don't require a closing tag.
 
-- Color tag is `"[c:123]"` and `"[/c]"`, where `"123"` is an ags color.
+- Color tag is `"[c:123]"` and `"[/c]"`, where `"123"` is an ags color for the text.
+- Outline color tag is `"[o:123]"` and `"[/o]"`, where `"123"` is an ags color for the outline.
 - Font tag is `"[f:123]"` and `"[/f]"`, where `"123"` is an ags font index.
 - Sprite tag is solo `"[s:123]`, where `"123"` is an ags sprite.
 
