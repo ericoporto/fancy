@@ -4730,7 +4730,7 @@
                 <Name>fancy</Name>
                 <Description>module for fancy text in AGS</Description>
                 <Author>eri0o</Author>
-                <Version>0.3.1</Version>
+                <Version>0.4.0</Version>
                 <Key>722673531</Key>
                 <IsHeader>False</IsHeader>
               </Script>
