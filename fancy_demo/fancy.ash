@@ -25,6 +25,11 @@ managed struct FancyDrawingConfig {
   static import FancyDrawingConfig* Create(FontType font, int color, int outline_color = COLOR_TRANSPARENT, int outline_width = 1, Alignment align = eAlignBottomLeft, int line_spacing = 0); 
 };
 
+builtin managed struct Fancy {
+  // allows adding a global alias to a tag-value. Ex: AddAlias("red", 63488) allows using [c:red] instead of [c:63488].
+  import static void AddAlias(String key, int value);
+};
+
 struct FancyTextBase {  
   /// Setup text arrangement and display parameters
   import void SetDrawingConfig(FancyDrawingConfig* config);
