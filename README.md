@@ -15,6 +15,8 @@ The cheatsheet of tags are below. Some tags are "solo", they don't require a clo
 
 Note: use `"\n"` for linefeed, old lone `"["` ags linefeed is not supported.
 
+![](https://i.imgur.com/w5olTxGl.png)
+
 ## Usage
 
 I will improve this soon, for now some small examples
