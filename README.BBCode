@@ -1,22 +1,23 @@
-[size=14pt][b][color=maroon]F[/color][color=hotpink]a[/color][color=navy]n[/color][color=purple]c[/color][color=limegreen]y[/color][/b][/size] [color=gray][b]version 0.1.0 [/b][/color]
+[size=14pt][b][color=maroon]F[/color][color=hotpink]a[/color][color=navy]n[/color][color=purple]c[/color][color=limegreen]y[/color][/b][/size] [color=gray][b]version 0.3.0 [/b][/color]
 
-[url="https://github.com/ericoporto/fancy/releases/download/v0.1.0/fancy.scm"]Get Latest Release [b]fancy.scm[/b][/url] | [url="https://github.com/ericoporto/fancy"]GitHub Repo[/url] | | [url="https://github.com/ericoporto/fancy/releases/download/v0.1.0/fancy_demo_windows.zip"]Project with Demo![/url]
+[url="https://github.com/ericoporto/fancy/releases/download/v0.3.0/fancy.scm"]Get Latest Release [b]fancy.scm[/b][/url] | [url="https://github.com/ericoporto/fancy"]GitHub Repo[/url] | [url="https://github.com/ericoporto/fancy/releases/download/v0.3.0/fancy_demo_windows.zip"]Project with Demo![/url]
 
-[url=https://github.com/ericoporto/fancy/actions][img]https://github.com/ericoporto/fancy/actions/workflows/main.yml/badge.svg[/img][/url]
+[url="https://github.com/ericoporto/fancy/actions"][img]https://github.com/ericoporto/fancy/actions/workflows/main.yml/badge.svg[/img][/url]
 
 Fancy is a Script module for "fancy" text in Adventure Game Studio, you can have text with multiple colors, fonts, with sprites and other. It brings it's own Typed-Text mechanism and additional fancyness.
 
 The cheatsheet of tags are below. Some tags are "solo", they don't require a closing tag.
 
 [list]
-[li]Color tag is [font=Courier New]"[c:123]"[/font] and [font=Courier New]"[/c]"[/font], where [font=Courier New]"123"[/font] is an ags color.[/li]
+[li]Color tag is [font=Courier New]"[c:123]"[/font] and [font=Courier New]"[/c]"[/font], where [font=Courier New]"123"[/font] is an ags color for the text.[/li]
+[li]Outline color tag is [font=Courier New]"[o:123]"[/font] and [font=Courier New]"[/o]"[/font], where [font=Courier New]"123"[/font] is an ags color for the outline.[/li]
 [li]Font tag is [font=Courier New]"[f:123]"[/font] and [font=Courier New]"[/f]"[/font], where [font=Courier New]"123"[/font] is an ags font index.[/li]
-[li]Sprite tag is solo  [font=Courier New]"[s:123]"[/font], where [font=Courier New]"123"[/font] is an ags sprite.[/li]
+[li]Sprite tag is solo  [font=Courier New]"[s:123]"[/font], where [font=Courier New]"123"[/font] is an ags sprite.[/li]
 [/list]
 
 [i]Note:[/i] use [font=Courier New]"\n"[/font] for linefeed, old lone [font=Courier New]"["[/font] ags linefeed is not supported.
 
-[img width=640]https://i.imgur.com/BVYytz3.png[/img]
+[img width=640]https://i.imgur.com/w5olTxG.png[/img]
 
 [hr]
 
@@ -29,10 +30,10 @@ I will improve this soon, for now some small examples
 [code]function room_AfterFadeIn()
 {
   DrawingSurface* surf = Room.GetDrawingSurfaceForBackground();
-  
+
   surf.DrawingColor = 10565;
   surf.DrawRectangle(48, 48, 248, 108);
-  surf.DrawFancyTextWrapped(48, 48, 200, 22422, eFontSpeech, "Hello!\nCan you find me the [c:27647]blue cup [s:2041][/c]?\nI lost it in the [c:64493]dangerous [f:0]planet[/f][/c], somewhere.");
+  surf.DrawFancyTextWrapped(48, 48, 200, 22422, eFontSpeech, "Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:2041][/c][/o]?\nI lost it in the [c:64493]dangerous [f:0]planet[/f][/c], somewhere.");
 }[/code]
 
 [i]Simple not-useful typed text example:[/i]
@@ -43,18 +44,18 @@ function room_AfterFadeIn()
 {
   fttb.SetDrawingConfig(FancyDrawingConfig.Create(eFontSpeech, 22422));
   fttb.SetDrawingArea(48, 48, 200);
-  fttb.Start("Hello!\nCan you find me the [c:27647]blue cup [s:2041][/c]?\nI lost it in the [c:64493]dangerous [f:0]planet[/f][/c], somewhere.");
+  fttb.Start("Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:2041][/c][/o]?\nI lost it in the [c:64493]dangerous [f:0]planet[/f][/c], somewhere.");
 }
 
 void repeatedly_execute_always()
 {
   DrawingSurface* surf = Room.GetDrawingSurfaceForBackground();
-  
+
   surf.DrawingColor = 10565;
   surf.DrawRectangle(48, 48, 248, 108);
-  
+
   fttb.Tick();
-  fttb.DrawTyped(surf);  
+  fttb.DrawTyped(surf);  
 }[/code]
 
 
@@ -69,11 +70,27 @@ void repeatedly_execute_always()
 Draws text with fancy parsing wrapped within specified boundaries on the drawing surface.
 
 
+[size=12pt][b]Fancy[/b][/size]
+
+This is a global struct you can't instantiate, it contains static methods for global configuration meant to be used at game start.
+
+[font=Courier New][b]Fancy.AddAlias[/b][/font]
+[code]static void Fancy.FancyDrawingConfig.AddAlias(String key, int value);[/code]
+
+Allows adding a global alias to a tag-value. Ex: AddAlias("red", 63488) allows using [c:red] instead of [c:63488].
+
+This may be useful if you want to be able to change your mind later on what is the specific of a color, or you want to have an easier type remembering sprite icons you are reusing in your texts.
+
+Alias added here are global to all of Fancy. It's recommended that you only add an alias once to everything you need at the game_start of your project, make it easier to manage aliases.
+
 [size=12pt][b]FancyDrawingConfig[/b][/size]
 
+This is a managed struct meant to configure an instance from FancyTextBase and extensions, prefer using it's [font=Courier New]Create[/font] method.
+
 [font=Courier New][b]FancyDrawingConfig.Create[/b][/font]
-[code]static FancyDrawingConfig* FancyDrawingConfig.Create(FontType font, int color, Alignment align, int line_spacing);[/code]
+[code]static FancyDrawingConfig* FancyDrawingConfig.Create(FontType font, int color, int outline_color, int outline_width, Alignment align, int line_spacing);[/code]
 Configuration structure for fancy text drawing, allowing customization of font, text color, line spacing, and alignment.
+By default, when using create, if you don't set, outline color is initially set for [font=Courier New]COLOR_TRANSPARENT[/font] and outline width is initially set to 1, align is set to eAlignBottomLeft and line_spacing is 0.
 
 
 [size=12pt][b]FancyTextBase[/b][/size]
