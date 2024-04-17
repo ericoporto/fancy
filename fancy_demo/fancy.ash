@@ -2,8 +2,12 @@
 // by eri0o
 
 // internal abstraction
-managed struct TextToken {
-  int text_begin, text_length, color, outline_color, font, type, width, height, line_height, line_width, box_width, box_height;
+managed struct FancyTextToken {
+  int text_begin, text_length, color, outline_color, font, type, width, height, line_height, line_width;
+};
+
+managed struct FancyState {
+  int X, Y, BoxWidth, BoxHeight;
 };
 
 #define FANCY_INFINITE_WIDTH 65536
@@ -36,11 +40,10 @@ struct FancyTextBase {
   
   // internal things
   protected String _text;
-  protected TextToken* _tk_arr[];
+  protected FancyTextToken* _tk_arr[];
+  protected FancyState* _fs;
   protected int _tk_count;
   protected FancyDrawingConfig* _cfg;
-  protected int _x;
-  protected int _y;
   protected int _width;
 };
 
