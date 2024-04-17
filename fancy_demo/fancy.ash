@@ -3,7 +3,7 @@
 
 // internal abstraction
 managed struct FancyTextToken {
-  int text_begin, text_length, color, outline_color, font, type, width, height, line_height, line_width;
+  int color, outline_color; short text_begin, text_length, font, type, width, height, line_height, line_width;
 };
 
 managed struct FancyState {
