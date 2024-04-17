@@ -53,7 +53,7 @@ import DynamicSprite* CreateFromFancyTextBox(static DynamicSprite, int color, Fo
 import Overlay* CreateFancyTextual(static Overlay, int x, int y, int width, FontType font, int color, const string text);
 
 /// Creates a screen overlay from a textbox with a fancy string using a 9-piece
-import Overlay* CreateFancyTextBox(static Overlay, int x, int y, int width, FontType font, int color, const string text, Fancy9Piece* f9p = null);
+import Overlay* CreateFancyTextBox(static Overlay, int x, int y, int width, FontType font, int color, const string text, Fancy9Piece* f9p);
 
 builtin managed struct Fancy {
   // allows adding a global alias to a tag-value. Ex: AddAlias("red", 63488) allows using [c:red] instead of [c:63488].
