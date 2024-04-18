@@ -69,14 +69,11 @@ builtin managed struct Fancy {
 
 struct FancyTextBase {  
   /// Setup text arrangement and display parameters
-  import void SetDrawingConfig(FancyDrawingConfig* config);
-  
+  import void SetDrawingConfig(FancyDrawingConfig* config);  
   /// Set drawing limits
-  import void SetDrawingArea(int x, int y, int width = FANCY_INFINITE_WIDTH);
-  
+  import void SetDrawingArea(int x, int y, int width = FANCY_INFINITE_WIDTH);  
   /// Sets the text of the fancy text box
-  import void SetFancyText(String text);
-  
+  import void SetFancyText(String text);  
   /// Draw Text in surface area
   import void Draw(DrawingSurface* surf);
   
