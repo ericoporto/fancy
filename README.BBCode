@@ -17,6 +17,8 @@ The cheatsheet of tags are below. Some tags are "solo", they don't require a clo
 
 [i]Note:[/i] use [font=Courier New]"\n"[/font] for linefeed, old lone [font=Courier New]"["[/font] ags linefeed is not supported.
 
+Notice that if you need to pass a number that is dynamic you can use String.Format to create the string with the proper number, like if the sprite icon you want to put in your text is from a dynamic sprite or the color of a word comes from a character speech color.
+
 [img width=640]https://i.imgur.com/w5olTxG.png[/img]
 
 [hr]
@@ -93,11 +95,11 @@ Create a sprite of a textbox with a fancy string using a 9-piece.
 
 
 [font=Courier New][b]Overlay.CreateFancyTextual[/b][/font]
-[code]Overlay* Overlay.CreateFancyTextual(int x, int y, int width, FontType font, int color, const string text);[/code]
+[code]Overlay* Overlay.CreateFancyTextual(int x, int y, int width, int color, FontType font, const string text);[/code]
 Creates a screen overlay from fancy text
 
 [font=Courier New][b]Overlay.CreateFancyTextBox[/b][/font]
-[code]Overlay* Overlay.CreateFancyTextBox(int x, int y, int width, FontType font, int color, const string text, Fancy9Piece* f9p);[/code]
+[code]Overlay* Overlay.CreateFancyTextBox(int x, int y, int width, int color, FontType font, const string text, Fancy9Piece* f9p);[/code]
 Creates a screen overlay from a textbox with a fancy string using a 9-piece
 
 
