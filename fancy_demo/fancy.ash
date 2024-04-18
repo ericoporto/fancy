@@ -1,5 +1,6 @@
 // fancy module header
 // by eri0o
+// Version 0.4.1
 
 // internal abstraction
 managed struct FancyTextToken {
@@ -54,6 +55,12 @@ import Overlay* CreateFancyTextual(static Overlay, int x, int y, int width, Font
 
 /// Creates a screen overlay from a textbox with a fancy string using a 9-piece
 import Overlay* CreateFancyTextBox(static Overlay, int x, int y, int width, FontType font, int color, const string text, Fancy9Piece* f9p);
+
+/// Sets a button NormalGraphic and additional sprites from it's text, assumed as fancy string, and 9-piece.
+import void Fancify(this Button*, Fancy9Piece* normal, Fancy9Piece* mouse_over = 0, Fancy9Piece* pushed = 0);
+
+/// Removes fancyness from button (clear any altered sprites)
+import void UnFancify(this Button*);
 
 builtin managed struct Fancy {
   // allows adding a global alias to a tag-value. Ex: AddAlias("red", 63488) allows using [c:red] instead of [c:63488].
