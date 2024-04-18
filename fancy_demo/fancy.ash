@@ -51,10 +51,10 @@ import DynamicSprite* CreateFromFancyString(static DynamicSprite, int color, Fon
 import DynamicSprite* CreateFromFancyTextBox(static DynamicSprite, int color, FontType font, Fancy9Piece* f9p, const string text, int width = FANCY_INFINITE_WIDTH);
 
 /// Creates a screen overlay from fancy text
-import Overlay* CreateFancyTextual(static Overlay, int x, int y, int width, FontType font, int color, const string text);
+import Overlay* CreateFancyTextual(static Overlay, int x, int y, int width, int color, FontType font, const string text);
 
 /// Creates a screen overlay from a textbox with a fancy string using a 9-piece
-import Overlay* CreateFancyTextBox(static Overlay, int x, int y, int width, FontType font, int color, const string text, Fancy9Piece* f9p);
+import Overlay* CreateFancyTextBox(static Overlay, int x, int y, int width, int color, FontType font, const string text, Fancy9Piece* f9p);
 
 /// Sets a button NormalGraphic and additional sprites from it's text, assumed as fancy string, and 9-piece.
 import void Fancify(this Button*, Fancy9Piece* normal, Fancy9Piece* mouse_over = 0, Fancy9Piece* pushed = 0);
