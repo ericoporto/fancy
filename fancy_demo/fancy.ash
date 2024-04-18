@@ -63,7 +63,7 @@ import void Fancify(this Button*, Fancy9Piece* normal, Fancy9Piece* mouse_over =
 import void UnFancify(this Button*);
 
 builtin managed struct Fancy {
-  // allows adding a global alias to a tag-value. Ex: AddAlias("red", 63488) allows using [c:red] instead of [c:63488].
+  /// allows adding a global alias to a tag-value. Ex: AddAlias("red", 63488) allows using [c:red] instead of [c:63488].
   import static void AddAlias(String key, int value);
 };
 
