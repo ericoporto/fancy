@@ -1,6 +1,6 @@
 // fancy module header
 // by eri0o
-// Version 0.4.2
+// Version 0.4.3
 
 // internal abstraction
 managed struct FancyTextToken {
