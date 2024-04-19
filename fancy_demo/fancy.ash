@@ -21,7 +21,7 @@ managed struct FancyState {
 managed struct FancyConfig {
   FontType Font;
   Alignment TextAlign;
-  int TextColor, OutlineColor, OutlineWidth, LineSpacing;
+  int TextColor, OutlineColor, OutlineWidth, LineSpacing, Padding;
   /// Create minimal fancy drawing configuration
   static import FancyConfig* Create(FontType font, int color, int outline_color = COLOR_TRANSPARENT, int outline_width = 1, Alignment align = eAlignBottomLeft, int line_spacing = 0); // $AUTOCOMPLETESTATICONLY$
 };
