@@ -1,6 +1,6 @@
-[size=14pt][b][color=maroon]F[/color][color=hotpink]a[/color][color=navy]n[/color][color=purple]c[/color][color=limegreen]y[/color][/b][/size] [color=gray][b]version 0.4.3 [/b][/color]
+[size=14pt][b][color=maroon]F[/color][color=hotpink]a[/color][color=navy]n[/color][color=purple]c[/color][color=limegreen]y[/color][/b][/size] [color=gray][b]version 0.5.0 [/b][/color]
 
-[url="https://github.com/ericoporto/fancy/releases/download/v0.4.3/fancy.scm"]Get Latest Release [b]fancy.scm[/b][/url] | [url="https://github.com/ericoporto/fancy"]GitHub Repo[/url] | [url="https://github.com/ericoporto/fancy/releases/download/v0.4.3/fancy_demo_windows.zip"]Project with Demo![/url]
+[url="https://github.com/ericoporto/fancy/releases/download/v0.5.0/fancy.scm"]Get Latest Release [b]fancy.scm[/b][/url] | [url="https://github.com/ericoporto/fancy"]GitHub Repo[/url] | [url="https://github.com/ericoporto/fancy/releases/download/v0.5.0/fancy_demo_windows.zip"]Project with Demo![/url]
 
 [url="https://github.com/ericoporto/fancy/actions"][img]https://github.com/ericoporto/fancy/actions/workflows/main.yml/badge.svg[/img][/url]
 
@@ -37,7 +37,7 @@ I will improve this soon, for now some small examples
 
   surf.DrawingColor = 10565;
   surf.DrawRectangle(48, 48, 248, 108);
-  surf.DrawFancyStringWrapped(48, 48, 200, 22422, eFontSpeech, "Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:2041][/c][/o]?\nI lost it in the [c:red]dangerous [f:0]planet[/f][/c], somewhere.");
+  surf.DrawFancyStringWrapped(48, 48, 200, FancyConfig.Create(eFontSpeech, 22422), "Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:2041][/c][/o]?\nI lost it in the [c:red]dangerous [f:0]planet[/f][/c], somewhere.");
 }[/code]
 
 [i]Simple not-useful typed text example:[/i]
@@ -49,7 +49,7 @@ function room_AfterFadeIn()
   Fancy.AddAlias("red", 64493); // this should be at game_start
   Fancy.AddAlias("ico_bcup", 2041); // this should be at game_start
 
-  fttb.SetDrawingConfig(FancyDrawingConfig.Create(eFontSpeech, 22422));
+  fttb.SetDrawingConfig(FancyConfig.Create(eFontSpeech, 22422));
   fttb.SetDrawingArea(48, 48, 200);
   fttb.Start("Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:ico_bcup][/c][/o]?\nI lost it in the [c:red]dangerous [f:0]planet[/f][/c], somewhere.");
 }
