@@ -73,33 +73,33 @@ void repeatedly_execute_always()
 [size=12pt][b]Script Extensions[/b][/size]
 
 [font=Courier New][b]DrawingSurface.DrawFancyString[/b][/font]
-[code]void DrawingSurface.DrawFancyString(int x, int y, int color, FontType font, const string text);[/code]
+[code]void DrawingSurface.DrawFancyString(int x, int y, FancyConfig* config, const string text);[/code]
 Draw the text from a fancy string on the drawing surface.
 
 [font=Courier New][b]DrawingSurface.DrawFancyStringWrapped[/b][/font]
-[code]void DrawingSurface.DrawFancyStringWrapped(int x, int y, int width, int color, FontType font, const string text);[/code]
+[code]void DrawingSurface.DrawFancyStringWrapped(int x, int y, int width, FancyConfig* config, const string text);[/code]
 Draws text with fancy parsing wrapped within specified boundaries on the drawing surface.
 
 
 [font=Courier New][b]DynamicSprite.CreateFromFancyString[/b][/font]
-[code]DynamicSprite* DynamicSprite.CreateFromFancyString(int color, FontType font, const string text);[/code]
+[code]DynamicSprite* DynamicSprite.CreateFromFancyString(FancyConfig* config, const string text);[/code]
 Create a sprite with the text of a fancy string
 
 [font=Courier New][b]DynamicSprite.CreateFromFancyStringWrapped[/b][/font]
-[code]DynamicSprite* DynamicSprite.CreateFromFancyStringWrapped(int width, int color, FontType font, const string text);[/code]
+[code]DynamicSprite* DynamicSprite.CreateFromFancyStringWrapped(int width, FancyConfig* config, const string text);[/code]
 Create a sprite with the text of a fancy string wwith word-wrap at set width
 
 [font=Courier New][b]DynamicSprite.CreateFromFancyTextBox[/b][/font]
-[code]DynamicSprite* DynamicSprite.CreateFromFancyTextBox(int color, FontType font, Fancy9Piece* f9p, const string text, int width = FANCY_INFINITE_WIDTH);[/code]
+[code]DynamicSprite* DynamicSprite.CreateFromFancyTextBox(FancyConfig* config, Fancy9Piece* f9p, const string text, int width = FANCY_INFINITE_WIDTH);[/code]
 Create a sprite of a textbox with a fancy string using a 9-piece.
 
 
 [font=Courier New][b]Overlay.CreateFancyTextual[/b][/font]
-[code]Overlay* Overlay.CreateFancyTextual(int x, int y, int width, int color, FontType font, const string text);[/code]
+[code]Overlay* Overlay.CreateFancyTextual(int x, int y, int width, FancyConfig* config, const string text);[/code]
 Creates a screen overlay from fancy text
 
 [font=Courier New][b]Overlay.CreateFancyTextBox[/b][/font]
-[code]Overlay* Overlay.CreateFancyTextBox(int x, int y, int width, int color, FontType font, const string text, Fancy9Piece* f9p);[/code]
+[code]Overlay* Overlay.CreateFancyTextBox(int x, int y, int width, FancyConfig* config, const string text, Fancy9Piece* f9p);[/code]
 Creates a screen overlay from a textbox with a fancy string using a 9-piece
 
 
@@ -117,7 +117,7 @@ Removes fancyness from button (clear any altered sprites)
 This is a global struct you can't instantiate, it contains static methods for global configuration meant to be used at game start.
 
 [font=Courier New][b]Fancy.AddAlias[/b][/font]
-[code]static void Fancy.FancyDrawingConfig.AddAlias(String key, int value);[/code]
+[code]static void Fancy.AddAlias(String key, int value);[/code]
 
 Allows adding a global alias to a tag-value. Ex: AddAlias("red", 63488) allows using [c:red] instead of [c:63488].
 
@@ -141,12 +141,12 @@ Create a 9 piece fancy from 9 sprite slots.
 You can optionally pass a color instead of a sprite for the center piece, by passing 0 to center_piece and a valid ags color in bg_color.
 
 
-[size=12pt][b]FancyDrawingConfig[/b][/size]
+[size=12pt][b]FancyConfig[/b][/size]
 
 This is a managed struct meant to configure an instance from FancyTextBase and extensions, prefer using it's [font=Courier New]Create[/font] method.
 
-[font=Courier New][b]FancyDrawingConfig.Create[/b][/font]
-[code]static FancyDrawingConfig* FancyDrawingConfig.Create(FontType font, int color, int outline_color, int outline_width, Alignment align, int line_spacing);[/code]
+[font=Courier New][b]FancyConfig.Create[/b][/font]
+[code]static FancyConfig* FancyConfig.Create(FontType font, int color, int outline_color, int outline_width, Alignment align, int line_spacing);[/code]
 Configuration structure for fancy text drawing, allowing customization of font, text color, line spacing, and alignment.
 By default, when using create, if you don't set, outline color is initially set for [font=Courier New]COLOR_TRANSPARENT[/font] and outline width is initially set to 1, align is set to eAlignBottomLeft and line_spacing is 0.
 
@@ -154,7 +154,7 @@ By default, when using create, if you don't set, outline color is initially set 
 [size=12pt][b]FancyTextBase[/b][/size]
 
 [font=Courier New][b]FancyTextBase.SetDrawingConfig[/b][/font]
-[code]void FancyTextBase.SetDrawingConfig(FancyDrawingConfig* config);[/code]
+[code]void FancyTextBase.SetDrawingConfig(FancyConfig* config);[/code]
 Sets the drawing configuration for fancy text rendering.
 
 [font=Courier New][b]FancyTextBase.SetDrawingArea[/b][/font]
