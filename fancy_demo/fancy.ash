@@ -18,10 +18,10 @@ managed struct FancyState {
 // ----------------------------------------------------------------------
 
 
-managed struct FancyDrawingConfig {
+managed struct FancyConfig {
   int Font, TextColor, OutlineColor, OutlineWidth, LineSpacing, TextAlign;
   /// Create minimal fancy drawing configuration
-  static import FancyDrawingConfig* Create(FontType font, int color, int outline_color = COLOR_TRANSPARENT, int outline_width = 1, Alignment align = eAlignBottomLeft, int line_spacing = 0); // $AUTOCOMPLETESTATICONLY$
+  static import FancyConfig* Create(FontType font, int color, int outline_color = COLOR_TRANSPARENT, int outline_width = 1, Alignment align = eAlignBottomLeft, int line_spacing = 0); // $AUTOCOMPLETESTATICONLY$
 };
 
 managed struct Fancy9Piece {
@@ -36,25 +36,25 @@ managed struct Fancy9Piece {
 };
 
 /// Draw the text from a fancy string with word-wrap at set width 
-import void DrawFancyStringWrapped(this DrawingSurface*, int x, int y, int width, int color, FontType font, const string text);
+import void DrawFancyStringWrapped(this DrawingSurface*, int x, int y, int width, FancyConfig* config, const string text);
 
 /// Draw the text from a fancy string
-import void DrawFancyString(this DrawingSurface*, int x, int y, int color, FontType font, const string text);
+import void DrawFancyString(this DrawingSurface*, int x, int y, FancyConfig* config, const string text);
 
 /// Create a sprite with the text of a fancy string with word-wrap at set width 
-import DynamicSprite* CreateFromFancyStringWrapped(static DynamicSprite, int width, int color, FontType font, const string text);
+import DynamicSprite* CreateFromFancyStringWrapped(static DynamicSprite, int width, FancyConfig* config, const string text);
 
 /// Create a sprite with the text of a fancy string
-import DynamicSprite* CreateFromFancyString(static DynamicSprite, int color, FontType font, const string text);
+import DynamicSprite* CreateFromFancyString(static DynamicSprite, FancyConfig* config, const string text);
 
 /// Create a sprite of a textbox with a fancy string using a 9-piece
-import DynamicSprite* CreateFromFancyTextBox(static DynamicSprite, int color, FontType font, Fancy9Piece* f9p, const string text, int width = FANCY_INFINITE_WIDTH);
+import DynamicSprite* CreateFromFancyTextBox(static DynamicSprite, FancyConfig* config, Fancy9Piece* f9p, const string text, int width = FANCY_INFINITE_WIDTH);
 
 /// Creates a screen overlay from fancy text
-import Overlay* CreateFancyTextual(static Overlay, int x, int y, int width, int color, FontType font, const string text);
+import Overlay* CreateFancyTextual(static Overlay, int x, int y, int width, FancyConfig* config, const string text);
 
 /// Creates a screen overlay from a textbox with a fancy string using a 9-piece
-import Overlay* CreateFancyTextBox(static Overlay, int x, int y, int width, int color, FontType font, const string text, Fancy9Piece* f9p);
+import Overlay* CreateFancyTextBox(static Overlay, int x, int y, int width, FancyConfig* config, const string text, Fancy9Piece* f9p);
 
 /// Sets a button NormalGraphic and additional sprites from it's text, assumed as fancy string, and 9-piece.
 import void Fancify(this Button*, Fancy9Piece* normal, Fancy9Piece* mouse_over = 0, Fancy9Piece* pushed = 0);
@@ -69,7 +69,7 @@ builtin managed struct Fancy {
 
 struct FancyTextBase {  
   /// Setup text arrangement and display parameters
-  import void SetDrawingConfig(FancyDrawingConfig* config);  
+  import void SetDrawingConfig(FancyConfig* config);  
   /// Set drawing limits
   import void SetDrawingArea(int x, int y, int width = FANCY_INFINITE_WIDTH);  
   /// Sets the text of the fancy text box
@@ -82,7 +82,7 @@ struct FancyTextBase {
   protected FancyTextToken* _tk_arr[];
   protected FancyState* _fs;
   protected int _tk_count;
-  protected FancyDrawingConfig* _cfg;
+  protected FancyConfig* _cfg;
   protected int _width;
 };
 
