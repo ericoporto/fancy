@@ -15,6 +15,8 @@ The cheatsheet of tags are below. Some tags are "solo", they don't require a clo
 
 Note: use `"\n"` for linefeed, old lone `"["` ags linefeed is not supported.
 
+Notice that if you need to pass a number that is dynamic you can use String.Format to create the string with the proper number, like if the sprite icon you want to put in your text is from a dynamic sprite or the color of a word comes from a character speech color.
+
 ![](https://i.imgur.com/w5olTxGl.png)
 
 ## Usage
@@ -26,11 +28,13 @@ I will improve this soon, for now some small examples
 ```AGS Script
 function room_AfterFadeIn()
 {
+  Fancy.AddAlias("red", 64493); // this should be at game_start
+
   DrawingSurface* surf = Room.GetDrawingSurfaceForBackground();
-  
+
   surf.DrawingColor = 10565;
   surf.DrawRectangle(48, 48, 248, 108);
-  surf.DrawFancyTextWrapped(48, 48, 200, 22422, eFontSpeech, "Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:2041][/c][/o]?\nI lost it in the [c:64493]dangerous [f:0]planet[/f][/c], somewhere.");
+  surf.DrawFancyString(48, 48, "Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:2041][/c][/o]?\nI lost it in the [c:red]dangerous [f:0]planet[/f][/c], somewhere.", FancyConfig.Create(eFontSpeech, 22422), 200);
 }
 ```
 
@@ -41,32 +45,68 @@ FancyTypedText fttb; // has to be global
 
 function room_AfterFadeIn()
 {
-  fttb.SetDrawingConfig(FancyDrawingConfig.Create(eFontSpeech, 22422));
+  Fancy.AddAlias("red", 64493); // this should be at game_start
+  Fancy.AddAlias("ico_bcup", 2041); // this should be at game_start
+
+  fttb.FancyConfig.Font = eFontSpeech;
+  fttb.FancyConfig.TextColor = 22422;
   fttb.SetDrawingArea(48, 48, 200);
-  fttb.Start("Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:2041][/c][/o]?\nI lost it in the [c:64493]dangerous [f:0]planet[/f][/c], somewhere.");
+  fttb.Start("Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:ico_bcup][/c][/o]?\nI lost it in the [c:red]dangerous [f:0]planet[/f][/c], somewhere.");
 }
 
 void repeatedly_execute_always()
 {
   DrawingSurface* surf = Room.GetDrawingSurfaceForBackground();
-  
+
   surf.DrawingColor = 10565;
   surf.DrawRectangle(48, 48, 248, 108);
-  
+
   fttb.Tick();
-  fttb.DrawTyped(surf);  
+  fttb.DrawTyped(surf);
 }
 ```
+
+---
 
 ## Script API
 
 ### Script Extensions
 
-#### `DrawingSurface.DrawFancyTextWrapped`
+#### `DrawingSurface.DrawFancyString`
 ```AGS Script
-void DrawingSurface.DrawFancyTextWrapped(int x, int y, int width, int color, FontType font, const string text);
+void DrawingSurface.DrawFancyString(int x, int y, const string text, optional FancyConfig* config, optional int width);
 ```
-Draws text with fancy parsing wrapped within specified boundaries on the drawing surface.
+Draw the text from a fancy string on the drawing surface.
+
+#### `DynamicSprite.CreateFromFancyString`
+```AGS Script
+DynamicSprite* DynamicSprite.CreateFromFancyString(const string text, optional FancyConfig* config, optional width);
+```
+Create a sprite with the text of a fancy string
+
+#### `DynamicSprite.CreateFromFancyTextBox`
+```AGS Script
+DynamicSprite* DynamicSprite.CreateFromFancyTextBox(const string text, optional FancyConfig* config, optional width, optional Fancy9Piece* f9p);
+```
+Create a sprite of a textbox with a fancy string using a 9-piece.
+
+#### `Overlay.CreateFancyTextBox`
+```AGS Script
+Overlay* Overlay.CreateFancyTextBox(int x, int y, const string text, optional FancyConfig* config, optional int width, optional Fancy9Piece* f9p );
+```
+Creates a screen overlay from a textbox with a fancy string using a 9-piece
+
+#### `Button.Fancify`
+```AGS Script
+void Button.Fancify(optional Fancy9Piece* normal, optional Fancy9Piece* mouse_over, optional Fancy9Piece* pushed);
+```
+Sets a button NormalGraphic and additional sprites from its text, assumed as fancy string, and 9-piece.
+
+#### `Button.UnFancify`
+```AGS Script
+void Button.UnFancify();
+```
+Removes fanciness from button (clear any altered sprites)
 
 
 ### Fancy
@@ -75,7 +115,7 @@ This is a global struct you can't instantiate, it contains static methods for gl
 
 #### `Fancy.AddAlias`
 ```AGS Script
-static void Fancy.FancyDrawingConfig.AddAlias(String key, int value);
+static void Fancy.AddAlias(String key, int value);
 ```
 
 Allows adding a global alias to a tag-value. Ex: AddAlias("red", 63488) allows using [c:red] instead of [c:63488].
@@ -84,24 +124,48 @@ This may be useful if you want to be able to change your mind later on what is t
 
 Alias added here are global to all of Fancy. It's recommended that you only add an alias once to everything you need at the game_start of your project, make it easier to manage aliases.
 
-
-### FancyDrawingConfig
-
-This is a managed struct meant to configure an instance from FancyTextBase and extensions, prefer using its `Create` method.
-
-#### `FancyDrawingConfig.Create`
+#### `Fancy.FancyConfig`
 ```AGS Script
-static FancyDrawingConfig* FancyDrawingConfig.Create(FontType font, int color, Alignment align, int line_spacing);
+static attribute FancyConfig* Fancy.FancyConfig;
+```
+
+This is the default global FancyConfig, if you don't specify or if you pass null to a method that requires a FancyConfig as parameter it will use this config instead.
+
+
+### Fancy9Piece
+
+This is a managed struct that holds a 9-piece that can be used for drawing text boxes.
+
+#### `Fancy9Piece.CreateFromTextWindowGui`
+```AGS Script
+static Fancy9Piece* Fancy9Piece.CreateFromTextWindowGui(GUI* text_window_gui);
+```
+Create a 9 piece fancy compatible from a Text Window GUI.
+
+#### `Fancy9Piece.CreateFrom9Sprites`
+```AGS Script
+static Fancy9Piece* Fancy9Piece.CreateFrom9Sprites(int top , int bottom, int left, int right, int top_left, int top_right, int bottom_left, int bottom_right, int center_piece = 0, int bg_color = 
+
+0);
+```
+Create a 9 piece fancy from 9 sprite slots.
+
+You can optionally pass a color instead of a sprite for the center piece, by passing 0 to center_piece and a valid AGS color in bg_color.
+
+
+### FancyConfig
+
+This is a managed struct meant to configure an instance from FancyTextBase and extensions, prefer using its Create method.
+
+#### `FancyConfig.Create`
+```AGS Script
+static FancyConfig* FancyConfig.Create(FontType font, int color, int outline_color, int outline_width, Alignment align, int line_spacing);
 ```
 Configuration structure for fancy text drawing, allowing customization of font, text color, line spacing, and alignment.
+By default, when using create, if you don't set, outline color is initially set for `COLOR_TRANSPARENT` and outline width is initially set to 1, align is set to eAlignBottomLeft and line_spacing is 0.
+
 
 ### FancyTextBase
-
-#### `FancyTextBase.SetDrawingConfig`
-```AGS Script
-void FancyTextBase.SetDrawingConfig(FancyDrawingConfig* config);
-```
-Sets the drawing configuration for fancy text rendering.
 
 #### `FancyTextBase.SetDrawingArea`
 ```AGS Script
@@ -120,6 +184,12 @@ Sets the text content for the fancy text, this is where the parsing of the text 
 void FancyTextBase.Draw(DrawingSurface* surf);
 ```
 Draws the fancy text on the specified drawing surface.
+
+#### `FancyTextBase.FancyConfig`
+```AGS Script
+attribute FancyConfig* FancyTextBase.FancyConfig;
+```
+Property to set the Fancy Text rendering configuration.
 
 
 ### FancyTypedText
@@ -153,6 +223,7 @@ Updates the typed text state, advancing it by a single tick.
 void FancyTypedText.DrawTyped(DrawingSurface* surf);
 ```
 Draws the typed text in its current state.
+
 
 ## License
 
