@@ -113,6 +113,11 @@ This may be useful if you want to be able to change your mind later on what is t
 
 Alias added here are global to all of Fancy. It's recommended that you only add an alias once to everything you need at the game_start of your project, make it easier to manage aliases.
 
+[font=Courier New][b]Fancy.FancyConfig[/b][/font]
+[code]static attribute FancyConfig* Fancy.FancyConfig;[/code]
+
+This is the default global FancyConfig, if you don't specify or if you pass null to a method that requires a FancyConfig as parameter it will use this config instead.
+
 
 [size=12pt][b]Fancy9Piece[/b][/size]
 
