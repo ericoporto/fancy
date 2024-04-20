@@ -37,7 +37,7 @@ I will improve this soon, for now some small examples
 
   surf.DrawingColor = 10565;
   surf.DrawRectangle(48, 48, 248, 108);
-  surf.DrawFancyStringWrapped(48, 48, 200, FancyConfig.Create(eFontSpeech, 22422), "Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:2041][/c][/o]?\nI lost it in the [c:red]dangerous [f:0]planet[/f][/c], somewhere.");
+  surf.DrawFancyString(48, 48, "Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:2041][/c][/o]?\nI lost it in the [c:red]dangerous [f:0]planet[/f][/c], somewhere.", FancyConfig.Create(eFontSpeech, 22422), 200);
 }[/code]
 
 [i]Simple not-useful typed text example:[/i]
@@ -49,7 +49,8 @@ function room_AfterFadeIn()
   Fancy.AddAlias("red", 64493); // this should be at game_start
   Fancy.AddAlias("ico_bcup", 2041); // this should be at game_start
 
-  fttb.SetDrawingConfig(FancyConfig.Create(eFontSpeech, 22422));
+  fttb.FancyConfig.Font = eFontSpeech;
+  fttb.FancyConfig.TextColor = 22422;
   fttb.SetDrawingArea(48, 48, 200);
   fttb.Start("Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:ico_bcup][/c][/o]?\nI lost it in the [c:red]dangerous [f:0]planet[/f][/c], somewhere.");
 }
