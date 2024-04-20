@@ -62,7 +62,6 @@ builtin managed struct Fancy {
 };
 
 struct FancyTextBase {
-  
   /// Set drawing limits
   import void SetDrawingArea(int x, int y, int width = FANCY_INFINITE_WIDTH);  
   /// Sets the text of the fancy text box
