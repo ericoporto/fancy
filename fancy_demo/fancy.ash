@@ -105,6 +105,8 @@ struct FancyTypedText extends FancyTextBase {
   /// Draw typed text state, advancing it by single tick
   import void DrawTyped(DrawingSurface* surf);
   
+  import attribute readonly bool IsTextBeingTyped;
+  
   // internal
   protected int _typed_token_count;
   protected int _typed_token_len;  
