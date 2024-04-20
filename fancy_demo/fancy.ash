@@ -23,7 +23,7 @@ managed struct FancyConfig {
   Alignment TextAlign;
   int TextColor, OutlineColor, OutlineWidth, LineSpacing, Padding;
   /// Create minimal fancy drawing configuration
-  static import FancyConfig* Create(FontType font, int color, int outline_color = COLOR_TRANSPARENT, int outline_width = 1, Alignment align = eAlignBottomLeft, int line_spacing = 0); // $AUTOCOMPLETESTATICONLY$
+  static import FancyConfig* Create(FontType font = 0, int color = 65535, int outline_color = COLOR_TRANSPARENT, int outline_width = 1, Alignment align = eAlignBottomLeft, int line_spacing = 0); // $AUTOCOMPLETESTATICONLY$
   import void Set(FancyConfig* config); // $AUTOCOMPLETEIGNORE$
 };
 
