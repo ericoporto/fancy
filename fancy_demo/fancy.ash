@@ -24,7 +24,10 @@ managed struct FancyConfig {
   int TextColor, OutlineColor, OutlineWidth, LineSpacing, Padding;
   /// Create minimal fancy drawing configuration
   static import FancyConfig* Create(FontType font = 0, int color = 65535, int outline_color = COLOR_TRANSPARENT, int outline_width = 1, Alignment align = eAlignBottomLeft, int line_spacing = 0); // $AUTOCOMPLETESTATICONLY$
-  import void Set(FancyConfig* config); // $AUTOCOMPLETEIGNORE$
+  
+  // internal
+  import void Set(FancyConfig* config); // $AUTOCOMPLETEIGNORE$  
+  import FancyConfig* Clone(); // $AUTOCOMPLETEIGNORE$  
 };
 
 managed struct Fancy9Piece {
@@ -59,6 +62,12 @@ import void UnFancify(this Button*);
 builtin managed struct Fancy {
   /// allows adding a global alias to a tag-value. Ex: AddAlias("red", 63488) allows using [c:red] instead of [c:63488].
   import static void AddAlias(String key, int value);
+  /// Global default text arrangement and display parameters
+  import static attribute FancyConfig* FancyConfig;
+#ifndef SCRIPT_EXT_AGS4
+  import static FancyConfig* get_FancyConfig(); // $AUTOCOMPLETEIGNORE$
+  import static void set_FancyConfig(FancyConfig* value); // $AUTOCOMPLETEIGNORE$
+#endif
 };
 
 struct FancyTextBase {
