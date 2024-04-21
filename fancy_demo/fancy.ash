@@ -147,6 +147,6 @@ struct FancyTypedText extends FancyTextBox {
   
   // internal
   protected int _typed_token_count;
-  protected int _typed_token_len;  
+  protected int _typed_token_len;
 };
 
