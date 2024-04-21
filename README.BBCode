@@ -160,9 +160,13 @@ By default, when using create, if you don't set, outline color is initially set 
 [code]void FancyTextBase.SetDrawingArea(int x, int y, int width = FANCY_INFINITE_WIDTH);[/code]
 Sets the area for drawing fancy text, specifying the position and width.
 
-[font=Courier New][b]FancyTextBase.SetFancyText[/b][/font]
-[code]void FancyTextBase.SetFancyText(String text);[/code]
+[font=Courier New][b]FancyTextBase.Text[/b][/font]
+[code]attribute String FancyTextBase.Text;[/code]
 Sets the text content for the fancy text, this is where the parsing of the text happens.
+
+[font=Courier New][b]FancyTextBase.PlainText[/b][/font]
+[code]attribute readonly String FancyTextBase.PlainText;[/code]
+Get the set text without tags.
 
 [font=Courier New][b]FancyTextBase.Draw[/b][/font]
 [code]void FancyTextBase.Draw(DrawingSurface* surf);[/code]
