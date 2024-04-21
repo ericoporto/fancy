@@ -78,6 +78,12 @@ builtin managed struct Fancy {
   import static FancyConfig* get_FancyConfig(); // $AUTOCOMPLETEIGNORE$
   import static void set_FancyConfig(FancyConfig* value); // $AUTOCOMPLETEIGNORE$
 #endif
+  /// Global default 9-piece for the Text Box creation when one not specified
+  import static attribute Fancy9Piece* Fancy9Piece;
+#ifndef SCRIPT_EXT_AGS4
+  import static Fancy9Piece* get_Fancy9Piece(); // $AUTOCOMPLETEIGNORE$
+  import static void set_Fancy9Piece(Fancy9Piece* value); // $AUTOCOMPLETEIGNORE$
+#endif
 };
 
 struct FancyTextBase {
