@@ -17,7 +17,6 @@ managed struct FancyState {
 // ---------------- fancy module public interface -----------------------
 // ----------------------------------------------------------------------
 
-
 managed struct FancyConfig {
   FontType Font;
   Alignment TextAlign;
@@ -126,8 +125,7 @@ struct FancyTextBox extends FancyTextBase {
 #ifndef SCRIPT_EXT_AGS4
   import Fancy9Piece* get_Fancy9Piece(); // $AUTOCOMPLETEIGNORE$
   import void set_Fancy9Piece(Fancy9Piece* value); // $AUTOCOMPLETEIGNORE$
-#endif
-  
+#endif  
 };
 
 struct FancyTypedText extends FancyTextBox {
