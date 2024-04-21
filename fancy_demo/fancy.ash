@@ -8,7 +8,7 @@ managed struct FancyTextToken {
 };
 
 managed struct FancyState {
-  int X, Y, TextWidth, TextHeight;
+  int X, Y, TextWidth, TextHeight, MaxTextWidth;
 };
 
 #define FANCY_INFINITE_WIDTH 65536
@@ -110,7 +110,6 @@ struct FancyTextBase {
   protected FancyState* _fs;
   protected int _tk_count;
   protected FancyConfig* _cfg;
-  protected int _width;
   protected Fancy9Piece* _f9p;
   bool _is_typed_text;  // $AUTOCOMPLETEIGNORE$
 };
