@@ -51,19 +51,21 @@ function room_AfterFadeIn()
 
   fttb.FancyConfig.Font = eFontSpeech;
   fttb.FancyConfig.TextColor = 22422;
-  fttb.SetDrawingArea(48, 48, 200);
+  fttb.SetDrawingArea(48, 40, 200);
   fttb.Start("Hello!\n[o:8560]Can you find me the [c:27647]blue cup [s:ico_bcup][/c][/o]?\nI lost it in the [c:red]dangerous [f:0]planet[/f][/c], somewhere.");
 }
 
 void repeatedly_execute_always()
 {
-  DrawingSurface* surf = Room.GetDrawingSurfaceForBackground();
-
-  surf.DrawingColor = 10565;
-  surf.DrawRectangle(48, 48, 248, 108);
-
-  fttb.Tick();
-  fttb.DrawTyped(surf);
+  if(fttb.IsTextBeingTyped)
+  {
+    DrawingSurface* surf = Room.GetDrawingSurfaceForBackground();
+    
+    surf.DrawingColor = 10565;
+    surf.DrawRectangle(48, 40, 248, 90);
+    
+    fttb.DrawTyped(surf);
+  }
 }[/code]
 
 
