@@ -140,9 +140,10 @@ struct FancyTypedText extends FancyTextBox {
   /// Draw typed text state, advancing it by single tick
   import void DrawTyped(DrawingSurface* surf);
   
-  /// Create a sprite of a the text being typed
+  /// Create a sprite of the text being typed
   import DynamicSprite* CreateTypedSprite();
   
+  /// True if a text is being typed in the FancyTypedText, and not finished.
   import attribute readonly bool IsTextBeingTyped;
   
   // internal

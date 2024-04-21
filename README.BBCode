@@ -173,6 +173,17 @@ Draws the fancy text on the specified drawing surface.
 Property to set the Fancy Text rendering configuration.
 
 
+[size=12pt][b]FancyTextBox[/b][/size]
+
+[font=Courier New][b]FancyTextBox.CreateTextBoxSprite[/b][/font]
+[code]DynamicSprite* FancyTextBox.CreateTextBoxSprite();[/code]
+Create a sprite of a textbox with a fancy string using the configured 9-piece
+
+[font=Courier New][b]FancyTextBox.Fancy9Piece[/b][/font]
+[code]atrribute Fancy9Piece* FancyTextBox.Fancy9Piece;[/code]
+Setup the 9-piece for the Text Box creation.
+
+
 [size=12pt][b]FancyTypedText[/b][/size]
 
 [font=Courier New][b]FancyTypedText.Clear[/b][/font]
@@ -193,7 +204,16 @@ Updates the typed text state, advancing it by a single tick.
 
 [font=Courier New][b]FancyTypedText.DrawTyped[/b][/font]
 [code]void FancyTypedText.DrawTyped(DrawingSurface* surf);[/code]
-Draws the typed text in it's current state.[/spoiler]
+Draws the typed text in it's current state.
+
+[font=Courier New][b]FancyTypedText.CreateTypedSprite[/b][/font]
+[code]DynamicSprite* FancyTypedText.CreateTypedSprite();[/code]
+Create a sprite of a the text being typed.
+
+[font=Courier New][b]FancyTypedText.IsTextBeingTyped[/b][/font]
+[code]attribute readonly bool FancyTypedText.IsTextBeingTyped;[/code]
+True if a text is being typed in the FancyTypedText, and not finished.
+[/spoiler]
 
 
 [hr]
