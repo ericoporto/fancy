@@ -31,14 +31,18 @@ managed struct FancyConfig {
 };
 
 managed struct Fancy9Piece {
-  int T, B, L, R, TL, TR, BL, BR, CBG; // $AUTOCOMPLETEIGNORE$
-  int T_w, T_h, B_w,  B_h, L_w, L_h, R_w, R_h, TL_w, TL_h, TR_w, TR_h, BL_w, BL_h, BR_w, BR_h, CBG_w, CBG_h, CBG_Color; // $AUTOCOMPLETEIGNORE$
-  int BorderTop, BorderBottom, BorderLeft, BorderRight; // $AUTOCOMPLETEIGNORE$
-  import void Set(int top , int bottom, int left, int right, int top_left, int top_right, int bottom_left, int bottom_right, int center_piece = 0, int bg_color = 0); // $AUTOCOMPLETEIGNORE$
+  int T, B, L, R, TL, TR, BL, BR, CBG;
+  int T_w, T_h, B_w,  B_h, L_w, L_h, R_w, R_h, TL_w, TL_h, TR_w, TR_h, BL_w, BL_h, BR_w, BR_h, CBG_w, CBG_h, CBG_Color;
+  int BorderTop, BorderBottom, BorderLeft, BorderRight;
+  import void SetAll(int top , int bottom, int left, int right, int top_left, int top_right, int bottom_left, int bottom_right, int center_piece = 0, int bg_color = 0); // $AUTOCOMPLETEIGNORE$
   /// Create a 9 piece fancy compatible from a Text Window GUI
   static import Fancy9Piece* CreateFromTextWindowGui(GUI* text_window_gui); // $AUTOCOMPLETESTATICONLY$
   /// Create a 9 piece fancy from 9 sprite slots
   static import Fancy9Piece* CreateFrom9Sprites(int top , int bottom, int left, int right, int top_left, int top_right, int bottom_left, int bottom_right, int center_piece = 0, int bg_color = 0); // $AUTOCOMPLETESTATICONLY$
+  
+  // internal
+  import void Set(Fancy9Piece* config); // $AUTOCOMPLETEIGNORE$  
+  import Fancy9Piece* Clone(); // $AUTOCOMPLETEIGNORE$  
 };
 
 /// Draw the text from a fancy string
@@ -52,6 +56,12 @@ import DynamicSprite* CreateFromFancyTextBox(static DynamicSprite, const string 
 
 /// Creates a screen overlay from a textbox with a fancy string using a 9-piece
 import Overlay* CreateFancyTextBox(static Overlay, int x, int y, const string text, FancyConfig* config = 0, int width = FANCY_INFINITE_WIDTH, Fancy9Piece* f9p = 0);
+
+/// A Say alternative that support fancy strings
+import void FancySay(this Character*, const string text, FancyConfig* config = 0, int width = FANCY_INFINITE_WIDTH, Fancy9Piece* f9p = 0);
+
+/// A Say alternative that support fancy strings
+import void FancySayTyped(this Character*, const string text, FancyConfig* config = 0, int width = FANCY_INFINITE_WIDTH, Fancy9Piece* f9p = 0);
 
 /// Sets a button NormalGraphic and additional sprites from it's text, assumed as fancy string, and 9-piece.
 import void Fancify(this Button*, Fancy9Piece* normal = 0, Fancy9Piece* mouse_over = 0, Fancy9Piece* pushed = 0);
@@ -73,27 +83,52 @@ builtin managed struct Fancy {
 struct FancyTextBase {
   /// Set drawing limits
   import void SetDrawingArea(int x, int y, int width = FANCY_INFINITE_WIDTH);  
-  /// Sets the text of the fancy text box
-  import void SetFancyText(String text);  
   /// Draw Text in surface area
   import void Draw(DrawingSurface* surf);
+  /// Sets/gets the text of the fancy text box
+  import attribute String Text;
+#ifndef SCRIPT_EXT_AGS4
+  import String get_Text(); // $AUTOCOMPLETEIGNORE$
+  import void set_Text(String value); // $AUTOCOMPLETEIGNORE$
+#endif
   /// Setup text arrangement and display parameters
   import attribute FancyConfig* FancyConfig;
 #ifndef SCRIPT_EXT_AGS4
   import FancyConfig* get_FancyConfig(); // $AUTOCOMPLETEIGNORE$
   import void set_FancyConfig(FancyConfig* value); // $AUTOCOMPLETEIGNORE$
 #endif
+  /// Get the set text without tags
+  import attribute readonly String PlainText;
+#ifndef SCRIPT_EXT_AGS4
+  import String get_PlainText(); // $AUTOCOMPLETEIGNORE$
+#endif
   
   // internal things
+  import protected void _set_text(String value); // $AUTOCOMPLETEIGNORE$
   protected String _text;
   protected FancyTextToken* _tk_arr[];
   protected FancyState* _fs;
   protected int _tk_count;
   protected FancyConfig* _cfg;
   protected int _width;
+  protected Fancy9Piece* _f9p;
+  bool _is_typed_text;  // $AUTOCOMPLETEIGNORE$
 };
 
-struct FancyTypedText extends FancyTextBase {
+struct FancyTextBox extends FancyTextBase {
+  /// Create a sprite of a textbox with a fancy string using the configured 9-piece
+  import DynamicSprite* CreateTextBoxSprite();
+  
+  /// Setup the 9-piece for the Text Box creation.
+  import attribute Fancy9Piece* Fancy9Piece;
+#ifndef SCRIPT_EXT_AGS4
+  import Fancy9Piece* get_Fancy9Piece(); // $AUTOCOMPLETEIGNORE$
+  import void set_Fancy9Piece(Fancy9Piece* value); // $AUTOCOMPLETEIGNORE$
+#endif
+  
+};
+
+struct FancyTypedText extends FancyTextBox {
   /// Clears all text and resets all timers
   import void Clear();
   /// Sets new string, resets all timers and commences typing
@@ -104,6 +139,9 @@ struct FancyTypedText extends FancyTextBase {
   import void Tick();
   /// Draw typed text state, advancing it by single tick
   import void DrawTyped(DrawingSurface* surf);
+  
+  /// Create a sprite of a the text being typed
+  import DynamicSprite* CreateTypedSprite();
   
   import attribute readonly bool IsTextBeingTyped;
   
