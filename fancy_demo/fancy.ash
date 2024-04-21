@@ -60,7 +60,7 @@ import Overlay* CreateFancyTextBox(static Overlay, int x, int y, const string te
 /// A Say alternative that support fancy strings
 import void FancySay(this Character*, const string text, FancyConfig* config = 0, int width = FANCY_INFINITE_WIDTH, Fancy9Piece* f9p = 0);
 
-/// A Say alternative that support fancy strings
+/// A Say alternative that support fancy strings, it types it instead of readily drawing
 import void FancySayTyped(this Character*, const string text, FancyConfig* config = 0, int width = FANCY_INFINITE_WIDTH, Fancy9Piece* f9p = 0);
 
 /// Sets a button NormalGraphic and additional sprites from it's text, assumed as fancy string, and 9-piece.
