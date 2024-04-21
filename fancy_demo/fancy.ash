@@ -31,9 +31,9 @@ managed struct FancyConfig {
 };
 
 managed struct Fancy9Piece {
-  int T, B, L, R, TL, TR, BL, BR, CBG;
-  int T_w, T_h, B_w,  B_h, L_w, L_h, R_w, R_h, TL_w, TL_h, TR_w, TR_h, BL_w, BL_h, BR_w, BR_h, CBG_w, CBG_h, CBG_Color;
-  int BorderTop, BorderBottom, BorderLeft, BorderRight;
+  int T, B, L, R, TL, TR, BL, BR, CBG; // $AUTOCOMPLETEIGNORE$  
+  int T_w, T_h, B_w,  B_h, L_w, L_h, R_w, R_h, TL_w, TL_h, TR_w, TR_h, BL_w, BL_h, BR_w, BR_h, CBG_w, CBG_h, CBG_Color; // $AUTOCOMPLETEIGNORE$  
+  int BorderTop, BorderBottom, BorderLeft, BorderRight; // $AUTOCOMPLETEIGNORE$  
   import void SetAll(int top , int bottom, int left, int right, int top_left, int top_right, int bottom_left, int bottom_right, int center_piece = 0, int bg_color = 0); // $AUTOCOMPLETEIGNORE$
   /// Create a 9 piece fancy compatible from a Text Window GUI
   static import Fancy9Piece* CreateFromTextWindowGui(GUI* text_window_gui); // $AUTOCOMPLETESTATICONLY$
