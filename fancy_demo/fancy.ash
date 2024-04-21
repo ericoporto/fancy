@@ -54,9 +54,6 @@ import DynamicSprite* CreateFromFancyString(static DynamicSprite, const string t
 /// Create a sprite of a textbox with a fancy string using a 9-piece
 import DynamicSprite* CreateFromFancyTextBox(static DynamicSprite, const string text, FancyConfig* config = 0, int width = FANCY_INFINITE_WIDTH, Fancy9Piece* f9p = 0);
 
-/// Creates a screen overlay from a textbox with a fancy string using a 9-piece
-import Overlay* CreateFancyTextBox(static Overlay, int x, int y, const string text, FancyConfig* config = 0, int width = FANCY_INFINITE_WIDTH, Fancy9Piece* f9p = 0);
-
 /// A Say alternative that support fancy strings
 import void FancySay(this Character*, const string text, FancyConfig* config = 0, int width = FANCY_INFINITE_WIDTH, Fancy9Piece* f9p = 0);
 
