@@ -2368,7 +2368,7 @@
             <ScriptName>cEgo</ScriptName>
             <Solid>True</Solid>
             <SpeechAnimationDelay>5</SpeechAnimationDelay>
-            <SpeechColor>12</SpeechColor>
+            <SpeechColor>65322</SpeechColor>
             <SpeechView>0</SpeechView>
             <StartX>127</StartX>
             <StartY>142</StartY>
