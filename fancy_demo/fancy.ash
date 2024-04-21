@@ -8,7 +8,7 @@ managed struct FancyTextToken {
 };
 
 managed struct FancyState {
-  int X, Y, BoxWidth, BoxHeight;
+  int X, Y, TextWidth, TextHeight;
 };
 
 #define FANCY_INFINITE_WIDTH 65536
